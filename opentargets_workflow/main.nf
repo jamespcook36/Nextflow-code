@@ -31,7 +31,7 @@ process filter_parquets {
   """
   mkdir -p ${params.workdir}/Output/${params.project}/
 
-  python3 ${params.workdir}/filter_parquet.py ${params.parquetfolder}$parquetfile output_$x ${params.workdir$
+  python3 ${params.workdir}/filter_parquet.py ${params.parquetfolder}$parquetfile output_$x ${params.workdir}/${params.posfile}
   """
 
 }
@@ -57,7 +57,7 @@ process filter_index {
   """
   mkdir -p ${params.workdir}/Output/${params.project}/
 
-  python3 ${params.workdir}/filter_parquet.py ${params.indexfolder}$indexfile output_index_$x ${params.workd$
+  python3 ${params.workdir}/filter_parquet.py ${params.indexfolder}$indexfile output_index_$x ${params.workdir}/${params.posfile}
   """
 
 }
@@ -81,6 +81,6 @@ process merge_findings {
   awk 'FNR==1 && NR!=1{next;}{print}' ${filtered_parquets} > combined_output.txt
   awk 'FNR==1 && NR!=1{next;}{print}' ${filtered_indexs} > combined_index.txt
 
-  Rscript --vanilla ${params.workdir}/process_final_outputs.R --args combined_output.txt $params.qtlthreshol$
+  Rscript --vanilla ${params.workdir}/process_final_outputs.R --args combined_output.txt $params.qtlthreshold ${params.workdir}/${params.posfile} combined_index.txt
   """
 }
