@@ -1,0 +1,8 @@
+name: my-env
+channels:
+  - conda-conda-forge
+  - conda-bioconda
+dependencies:
+  - python=3.7
+  - pyarrow
+  - pandas
