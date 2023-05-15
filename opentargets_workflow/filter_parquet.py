@@ -10,18 +10,8 @@ lines = [l.split(':', 1)[1] for l in lines]
 
 lines = [l.split('_', 1)[0] for l in lines]
 
-#pathval = ${params.parquetfolder}
-#fileval = $parquetfile
-
-#pathfile = pathval+fileval
-
-# Read the parquet file
-#df = pd.read_parquet('${params.parquetfolder}$parquetfile')
-
 parquet_file = argv[1]
 pqfile = pq.read_table(parquet_file)
-
-# pqfile = pq.read_table('${params.parquetfolder}parquetfile')
 
 df = pqfile.to_pandas()
 
